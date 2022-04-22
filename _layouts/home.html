@@ -1,0 +1,11 @@
+---
+layout: post
+# The Home page layout
+---
+
+{% for tab in site.tabs %}
+	{% if tab.index %}
+		{{ tab.content }}
+		{% break %}
+	{% endif %}
+{% endfor %}

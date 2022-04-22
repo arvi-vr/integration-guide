@@ -1,0 +1,121 @@
+<!--
+  The Side Bar
+-->
+
+<div id="nav-wrapper">
+
+  <div id="profile-wrapper" class="d-flex flex-column">
+    <div id="avatar" class="d-flex justify-content-center">
+      <a href="{{ site.baseurl }}/" alt="avatar">
+        {% assign avatar_url = site.avatar %}
+        {% capture start %}{{ site.avatar | slice: 0 }}{% endcapture %}
+        {% if start == '/' %}
+          {% assign avatar_url = avatar_url | relative_url %}
+        {% endif %}
+        <img src="{{ avatar_url }}" alt="avatar" onerror="this.style.display='none'">
+      </a>
+    </div>
+
+    <div class="profile-text mt-3">
+      <div class="site-title">
+        <a href="{{ '/' | relative_url }}">{{- site.title -}}</a>
+      </div>
+      <div class="site-subtitle font-italic">{{- site.tagline -}}</div>
+    </div>
+  </div><!-- #profile-wrapper -->
+
+
+	<ul class="sidebar-menu">
+		<!-- Introduction -->
+		<li class="sidebar-menu-item justify-content-center{% if page.index %}{{ " active" }}{% endif %}">
+			<a href="{{ '/' | relative_url }}" class="nav-link justify-content-center align-items-center w-100">
+				<i class="fa-fw fas fa-home ml-xl-3 mr-xl-3"></i>
+				<span>INTRODUCTION</span>
+			</a>
+		</li>
+
+		{% assign last_menu_type = "" %}
+		{% assign sorted_tabs = site.tabs | sort:'order' %}
+		{% for tab in sorted_tabs %}
+			{% if tab.index %}
+				{% continue %}
+			{% endif %}
+			{% if tab.menu == 'root' %}
+				{% if last_menu_type == 'child' %}
+				</ul>
+			</li>
+				{% endif %}
+			<li id="{{ tab.url }}" class="sidebar-menu-item justify-content-center{% if tab.url == page.url %}{{ " active"}}{% endif %}">
+				<a href="#" class="nav-link justify-content-center align-items-center w-100">
+					<i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3"></i>
+					<span>{{ tab.title | upcase }}</span>
+				</a>
+				<ul class="sidebar-submenu menu-child">				
+			{% elsif tab.menu == 'child' %}
+					<li class="justify-content-center">
+						<a href="{{ tab.url | relative_url }}" class="nav-link justify-content-center align-items-center w-100">
+							<span>{{ tab.title | upcase }}</span>
+						</a>
+					</li>
+			{% else %}
+				{% if last_menu_type == 'child' %}
+				</ul>
+			</li>
+				{% endif %}
+			<li class="sidebar-menu-item justify-content-center{% if tab.url == page.url %}{{ " active"}}{% endif %}">
+				<a href="{{ tab.url | relative_url }}" class="nav-link justify-content-center align-items-center w-100">
+					<i class="fa-fw {{ tab.icon }} ml-xl-3 mr-xl-3"></i>
+					<span>{{ tab.title | upcase }}</span>
+				</a>
+			</li>
+			{% endif %}
+		  
+			{% assign last_menu_type = tab.menu %}
+		
+		{% endfor %}
+
+		{% if last_menu_type == 'child' %}
+				</ul>
+			</li>
+		{% endif %}
+	</ul>
+
+</div><!-- #nav-wrapper -->
+
+<div class="sidebar-bottom d-flex flex-wrap justify-content-around mt-4">
+
+  {% unless site.theme_mode %}
+  <span id="mode-toggle-wrapper">
+    {% include mode-toggle.html %}
+  </span>
+  <span class="icon-border"></span>
+  {% endunless %}
+
+  {% for entry in site.data.contact %}
+    {% capture url %}
+      {%- if entry.type == 'github' -%}
+        https://github.com/{{ site.github.username }}
+      {%- elsif entry.type == 'discord' -%}
+        {{ entry.url }}
+      {%- elsif entry.type == 'email' -%}
+        {% assign email = site.social.email | split: '@' %}
+        javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+      {%- elsif entry.type == 'rss' -%}
+        {{ "/feed.xml" | relative_url }}
+      {%- else -%}
+        {{ entry.url }}
+      {%- endif -%}
+    {% endcapture %}
+
+    {% if url %}
+    <a href="{{ url }}" aria-label="{{ entry.type }}" title="{{ entry.hint }}" {% unless entry.noblank %}target="_blank" rel="noopener"{% endunless %}>
+      <i class="{{ entry.icon }}"></i>
+    </a>
+    {% endif %}
+  {% endfor %}
+
+</div>
+
+<script>
+    $.sidebarMenu($('.sidebar-menu'))
+</script>
