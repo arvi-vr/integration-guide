@@ -282,10 +282,3 @@ Our platform sends information about whether it is necessary to activate cord tw
 ### Trial Mode
 When starting the game from the control panel, the operator in some cases may indicate that the game should be launched in Trial Mode. Typically, this launch mode is used for testing or demonstration purposes and is not intended for commercial use.
 You can use the `Integration.IsApplicationInTrialMode` property to understand that the game is running in trial mode and display a corresponding message in the game about it. The message can also indicate that commercial use is prohibited.
-
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
-  new Crate({
-    server: '789059057814208523',
-    channel: '789131516545466388'
-  })
-</script>

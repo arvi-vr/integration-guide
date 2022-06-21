@@ -491,10 +491,3 @@ void AExampleActor::BeginPlay()
 ```
 
 <img src="{{ '/assets/img/bp-is-trial-mode.png' | relative_url }}" class="img-fluid" />
-
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
-  new Crate({
-    server: '789059057814208523',
-    channel: '789133359174778922'
-  })
-</script>

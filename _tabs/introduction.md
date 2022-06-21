@@ -17,4 +17,4 @@ It contains the following sections:
 - **`DOWNLOADS`**: Provides links to download plugins and developer tools required for integration.
 
 # Have any questions?
-We try to maintain a comprehensive set of documentation. However, we realize that often there are questions that remain unanswered. For any technical questions relating to game maintenance and integration not answered here, please join our [Discord](https://discord.gg/DQHrdaS9pc) or contact our support [vr.support@arvilab.com](mailto:vr.support@arvilab.com).
+We try to maintain a comprehensive set of documentation. However, we realize that often there are questions that remain unanswered. For any technical questions relating to game maintenance and integration not answered here, please contact our [Support](mailto:vr.support@arvilab.com).
