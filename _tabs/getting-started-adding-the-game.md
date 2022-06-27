@@ -203,7 +203,24 @@ This example creates a Trackbar named ROUNDDURATION. If you then use [$ROUNDDURA
 
 <a name="creating-new-version"></a>
 # Creating a new game version and uploading files
-After creating the game description and manifest, you need to create the first game version. You will also need to create new versions in case you want to update the game. To do this, use the [Build Uploader]({{ '/tabs/downloads-dev-tools/' | relative_url }}) utility. After its launch and authorization, select the **Upload** mode.
+After creating the game description and manifest, you need to create the first game version. You will also need to create new versions in case you want to update the game.  
+
+<a name="game-signing"></a>
+## Signing the game executable
+We strongly recommend signing the game executable with a Code Signing Certificate. Code Signing Certificates are used by software developers to digitally sign applications, drivers, executables and software programs as a way for end-users to verify that the code they receive has not been altered or compromised by a third party. They include your signature, your company’s name and, if desired, a timestamp. This will avoid possible Windows pop-ups about an unknown publisher, and also protects your executable from modifications.  
+You can purchase a Code Signing Certificate from many companies - Sectigo, Certum, DigiCert, GlobalSign etc. After you buy a code signing certificate, you will need to sign your game's executable file with it.  
+1. Download your certificate file (with **.crt** extension) and private key file (with **.key** extension) from the site where you bought the Code Signing Certificate
+2. Download and install [**OpenSSL**](https://thesecmaster.com/procedure-to-install-openssl-on-the-windows-platform/)
+3. Convert the **.key** and **.crt** files to a **.pfx** file for code signing. To do this, run the following command:  
+`openssl.exe pkcs12 -inkey "MY_KEY_FILE.key" -in "MY_CRT_FILE.crt" -export -out mycertificate.pfx` and set the password for your certificate. As a result, you will get a file that can be used to sign the game
+4. Download and install [**Windows SDK**](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
+5. Now you can sign your game with the following command:  
+`"C:\Program Files (x86)\Windows Kits\10\App Certification Kit\signtool.exe" sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a /f mycertificate.pfx /p MY_CERT_PASSWORD "my_game.exe"`
+6. Right click your file and select Properties. Check the Digital Signatures tab. Your file should be now digitally signed
+
+<a name="game-uploading"></a>
+## Uploading the game
+Use the [Build Uploader]({{ '/tabs/downloads-dev-tools/' | relative_url }}) utility for uploading your game to our platform. After its launch and authorization, select the **Upload** mode.
 
 <a href="{{ '/assets/img/build-uploader-upload.png' | relative_url }}" data-toggle="lightbox"><img src="{{ '/assets/img/build-uploader-upload.png' | relative_url }}" class="img-fluid" style="max-width:500px;width:100%;" /></a>
 
