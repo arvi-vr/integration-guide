@@ -4,15 +4,15 @@ order: 12
 menu: child
 ---
 
-# Build Uploader 1.4.8 (September 16, 2022)
+# Build Uploader 1.4.9 (September 20, 2022)
 
 Utility for uploading new game versions to ARVI platform. Uploading procedure is described in [Adding the game]({{ '/tabs/getting-started-adding-the-game/#creating-a-new-game-version-and-uploading-files' | relative_url }}) section.
 
 ## Changes
-- Fixed manifest validation rules
+- Improved manifest handling
 
 <hr>
-<button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/4b3e2797-34c6-45a7-84a7-11dc0e4f6bc4/versions/a4fbd5ec-39dc-4011-ad10-280d6df59b99/files/Build%20Uploader%20Setup.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
+<button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/4b3e2797-34c6-45a7-84a7-11dc0e4f6bc4/versions/ff1e83fc-84f7-45a3-8f17-f0707dd10905/files/Build%20Uploader%20Setup.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
 
 # API Tester 1.3 (August 2, 2022)
 
