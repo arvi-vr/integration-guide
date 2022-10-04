@@ -39,6 +39,7 @@ If you decide to install the compiled plugin, then follow the next steps:
 Go to **Edits 🡒 Plugins** to check that the plugin is installed and set up correctly.
 
 <img src="{{ '/assets/img/unreal-integration-plugins-menu.png' | relative_url }}" class="img-fluid" />
+
 <img src="{{ '/assets/img/unreal-integration-plugins-window.png' | relative_url }}" height="150px" class="img-fluid"/>
 
 # Platform integration
