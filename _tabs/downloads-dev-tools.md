@@ -22,4 +22,4 @@ Utility for testing SDK integration. For more information see [TESTING]({{ '/tab
 - Fixed display of text data for some commands
 
 <hr>
-<button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/4ef9d0b5-ed6b-4ce0-9600-7f9e8d289741/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
+<button onclick="window.open('https://storage-eu-east-1.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/4ef9d0b5-ed6b-4ce0-9600-7f9e8d289741/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
