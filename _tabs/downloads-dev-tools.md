@@ -14,13 +14,12 @@ Utility for uploading new game versions to ARVI platform. Uploading procedure is
 <hr>
 <button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/4b3e2797-34c6-45a7-84a7-11dc0e4f6bc4/versions/ff1e83fc-84f7-45a3-8f17-f0707dd10905/files/Build%20Uploader%20Setup.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
 
-# API Tester 1.3 (August 2, 2022)
+# API Tester 1.4 (October 24, 2022)
 
 Utility for testing SDK integration. For more information see [TESTING]({{ '/tabs/testing/' | relative_url }}) section.
 
 ## Changes
-- Improved support for session variables
-- New UI
+- Fixed display of text data for some commands
 
 <hr>
-<button onclick="window.open('https://storage-eu-east-1.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/dea73204-fd02-4951-90af-5d61039c9eb4/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
+<button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/4ef9d0b5-ed6b-4ce0-9600-7f9e8d289741/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
