@@ -23,6 +23,54 @@ After SDK is imported into Unity, a new ARVI menu will appear. Select **ARVI ðŸ¡
 # Platform integration
 All features required for integration are in the `Integration` class. A detailed description of its methods follows. The folder **ARVI/SDK/Examples** contains the most common integration usage examples.
 
+<a name="integration-properties"></a>
+## Properties
+
+| {::nomarkdown}<div style="width:280px">{:/}Property{::nomarkdown}</div>{:/} | Description |
+| --- | --- |
+| **`AppKey`** | Application Key, provided with API and used for entitlement checks |
+| **`Initialized`** | Gets if the integration API initialized and ready to use. If API is not initialized, you should call `Initialize` method |
+| **`PlayerDominantHand`** | Player's dominant hand. Useful for games where it is important to know if the player is right-handed or left-handed |
+| **`PlayerID`** | Session-unique player ID. Can be useful for identifying a player in a session  |
+| **`PlayerName`** | Player name. Initially can be set by the operator in the admin panel before starting the game, but can be empty if the name is not set. You can set it yourself using the `SetPlayerName` method if your game supports player name input. If you set this property yourself, the specified name will be displayed in the operator's admin panel |
+| **`PlayersCount`** | Number of players for whom a game was launched |
+| **`ServerIP`** | Game server IP address |
+| **`SessionID`** | Unique game session identifier. Can be useful for separating sessions if there are several sessions of your game running on the network and you are looking for players on the network yourself |
+| **`SessionLanguage`** | Game language selected by the operator in the admin panel before launch. Presented as a two-letter abbreviation (ISO 639-1). EN, DE, FR, etc. |
+| **`SessionTime`** | Game session time in seconds. Typically, this is the value you set in the Game timeout field of the game manifest |
+| **`ShouldApplicationTrackCordTwisting`** | Indicates to the game whether it should track cord twisting. By default it is set to True. False value is set for wireless headsets |
+
+<a name="integration-methods"></a>
+## Methods
+
+| {::nomarkdown}<div style="width:200px">{:/}Method{::nomarkdown}</div>{:/} | Description |
+| --- | --- |
+| **`IsApplicationEntitled`** | Checks if application is entitled to run on this computer |
+| **`ServerStarted`** | Sends a notification to the platform about the launch of the game server. You should call this method when your game server is ready to accept connections |
+| **`GameCompleted`** | Sends a notification to the platform about the end of the game. Call this method when the game is over |
+| **`CallOperator`** | Sends a request for operator assistance to the platform. Bind a call to this method to game objects in the game so that players can request operator assistance |
+| **`SetAudioChatChannel`** | Sets an audio chat channel. Useful for games where there is a division into teams so that players on one team do not hear the players on the other |
+| **`ActivateInGameCommand`** | Activates in-game command. If several commands have the same activation message, then they will all be activated |
+| **`DeactivateInGameCommand`** | Deactivates in-game command. If several commands have the same deactivation message, then they will all be deactivated |
+| **`SendLogMessage`** | Sends text message to platform log |
+| **`SendTrackingMessage`** | Sends tracking message. It will be used for your events visualization |
+| **`SetPlayerName`** | Sets the new player name. Use this method if your game supports player name input |
+| **`SetPlayerDominantHand`** | Sets the new player dominant hand. Use this method if your game supports player dominant hand selection |
+| **`SetSessionData`** | Sets session-related data by name. You can create your own custom local (not network) variables that will be stored in the platform during the entire session. It can be useful if your game restarts within the same game session to load previously saved settings |
+| **`TryGetSessionData`** | Gets session-related data saved with `SetSessionData` method |
+| **`TryGetUISettings`** | Gets UI settings by name. For more information about how the UI settings work, see the [UI Settings]({{ '/tabs/getting-started-adding-the-game/#ui-settings' | relative_url }}) section |
+
+<a name="integration-events"></a>
+## Events
+
+| {::nomarkdown}<div style="width:200px">{:/}Event{::nomarkdown}</div>{:/} | Description |
+| --- | --- |
+| **`PlatformMessageReceived`** | Fires when the platform sends message to the game. Use to [handle in-game commands](#integration-handling-game-commands)  |
+| **`TimeLeftRequest`** | Fires when the platform asks the game for time until the end of the session. See [Time Left Request](#integration-time-left-request) handling for details |
+| **`PlayerPositionRequest`** | Fires when the platform asks the game for the 3D coordinates of the player in the world. See [Player Position Request](#integration-player-position-request) handling for details |
+| **`PlayerNameChanged`** | Fires when a player's name has been changed by the operator in the admin panel. Use to update the player's name in the game |
+| **`PlayerDominantHandChanged`** | Fires when a player's dominant hand has been changed by the operator in the admin panel. Use to update the player's dominant hand in the game |
+
 ## Initialization and verification
 The first step is to initialize SDK on your integration module by calling the `Integration.Initialize()` method.
 ```cs
@@ -107,9 +155,10 @@ protected void HandlePlayerPositionRequest(out Vector3 playerPosition, out Vecto
 }
 ```
 
+<a name="integration-handling-game-commands"></a>
 ## Handling of game commands
-In addition to the above-mentioned standard requests, the platform may send [in-game commands]({{ '/tabs/getting-started-adding-the-game/#in-game-commands' | relative_url }}) that you can create in the developer account on our website. They will be sent into the game from our control panel by the operator.
-For example, you created a Skip command that skips tasks in your game.  To make sure that your game handles this command, you need to subscribe to messages from the platform and specify the handler that will execute Skip check.
+In addition to the above-mentioned standard requests, the platform may send [in-game commands]({{ '/tabs/getting-started-adding-the-game/#in-game-commands' | relative_url }}) that you can create in the developer account on our website. They will be sent into the game from our control panel by the operator.  
+For example, you created a **Skip Puzzle** command with **/skip** command URL, **+5 min** command with **/timemodify?minutes=5** command URL and **-5 min** command with **/timemodify?minutes=-5** command URL. In order for your game to handle these commands, you need to subscribe to messages from the platform and specify the handler that will execute your in-game commands. Then you can handle them like this:
 ```cs
 using ARVI.SDK;
 ...
@@ -130,21 +179,26 @@ protected virtual void HandleMessageFromPlatform(PlatformMessage message)
   var messageName = message.Name.ToLowerInvariant();
   switch (messageName)
   {
+    // Command URL that you defined for "Skip Puzzle" command
     case "skip":
-      // Handle your "Skip" command here
+      // Handle your "Skip Puzzle" command here
       message.SetResponse("OK");
       break;
-    case "some_message_with_json_response":
-      message.SetResponse("{ \"name\" : \"value\" }", "application/json");
+    // Command URL that you defined for time modification commands
+    case "timemodify":
+      // Get the minutes value from command params
+      var minutes = message.Params["minutes"];
+      switch (minutes)
+      {
+        case "+5":
+          // Handle your "+5 min" command here
+          break;
+        case "-5":
+          // Handle your "-5 min" command here
+          break;
+      }
+      message.SetResponse("OK");
       break;
-    case "some_message_with_binary_response":
-      message.SetResponse(new byte[] { 65, 82, 86, 73});
-      break;
-    case "some_message_with_error_response":
-      message.SetError("Error description");
-      break;
-    default:
-      return;
   }
 }
 ```

@@ -11,8 +11,7 @@ Please also note that ARVI platform uses a number of ports for its own purposes,
 # SDK installation and setup
 This Integration SDK requires **Unreal Engine 4.22** or newer. It comes in the form of a plugin and available in few options:
 * Source code plugin
-* Compiled plugin for Unreal Engine 4.22
-* Compiled plugin for Unreal Engine 4.25
+* Compiled plugin for Unreal Engine 4.27
 
 All these options are available in [DOWNLOADS]({{ '/tabs/downloads-unreal/' | relative_url }}) section.
 
