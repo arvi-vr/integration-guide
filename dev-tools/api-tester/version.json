@@ -1,6 +1,6 @@
 {
-	"version":"1.4",
-	"name":"1.4",
-	"changes":"\u2022 Fixed display of text data for some commands",
-	"url":"https:\/\/storage-eu-east-1.arvilab.com\/storage\/applications\/3\/cee1325e-f16a-4237-b92a-eda4d30803f5\/versions\/4ef9d0b5-ed6b-4ce0-9600-7f9e8d289741\/files\/APITester.exe"
+	"version":"1.5",
+	"name":"1.5",
+	"changes":"\u2022 Added UI Settings support\n\u2022 Session Variables now can be saved and loaded",
+	"url":"https:\/\/storage-eu-east-2.arvilab.com\/storage\/applications\/3\/cee1325e-f16a-4237-b92a-eda4d30803f5\/versions\/c52e6399-7fe3-4bdb-8466-600eb40c09b8\/files\/APITester.exe"
 }
