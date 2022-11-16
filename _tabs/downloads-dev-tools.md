@@ -23,4 +23,4 @@ Utility for testing SDK integration. For more information see [TESTING]({{ '/tab
 - Session Variables now can be saved and loaded
 
 <hr>
-<button onclick="window.open('https://storage-eu-east-2.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/c52e6399-7fe3-4bdb-8466-600eb40c09b8/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
+<button onclick="window.open('https://storage-us-west-1.arvilab.com/storage/applications/3/cee1325e-f16a-4237-b92a-eda4d30803f5/versions/c52e6399-7fe3-4bdb-8466-600eb40c09b8/files/APITester.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
