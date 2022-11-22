@@ -42,7 +42,7 @@ Go to **Edits 🡒 Plugins** to check that the plugin is installed and set up co
 <img src="{{ '/assets/img/unreal-integration-plugins-window.png' | relative_url }}" height="150px" class="img-fluid"/>
 
 # Platform integration
-In source code, integration comes in the form of a game instance sub-system. The object is accessible via the `UGameInstance` class object.
+In source code, integration comes in the form of a game instance sub-system. The object is accessible via the `UGameInstance` class object.  
 ```c++
 #include "ARVIIntegrationSubSystem.h"
 ...
@@ -68,6 +68,65 @@ The class is described in `ARVIIntegrationSubSystem.h`. Class methods duplicate 
 You may also use Blueprint:
 
 <img src="{{ '/assets/img/bp-initialization.png' | relative_url }}" class="img-fluid" />
+
+<a name="integration-properties"></a>
+### UARVIIntegrationSubSystem Properties
+
+| {::nomarkdown}<div style="width:280px">{:/}Property{::nomarkdown}</div>{:/} | {::nomarkdown}<div style="width:280px">{:/}C++ accessor method{::nomarkdown}</div>{:/} | Description |
+| --- | --- | --- |
+| **`MessagesWasInitialize`** | **`GetMessagesWasInitialize`** | Indicates if the module Messages has been initialized |
+| **`SessionVariablesWasInitialize`** | **`GetSessionVariablesWasInitialize`** | Indicates if the module SessionVariables has been initialized |
+| **`ShouldApplicationTrackCordTwisting`** | **`GetIsApplicationInTrialMode`** | Gets if the application is running in trial mode |
+| **`IsApplicationInTrialMode`** | **`GetMessagesWasInitialize`** | Indicates if the module Messages has been initialized |
+| **`PlayersCount`** | **`GetPlayersCount`** | Number of players in the session |
+| **`ServerIP`** | **`GetServerIP`** | Game server IP address |
+| **`SessionLanguage`** | **`GetSessionLanguage`** | Game session language |
+| **`SessionTime`** | **`GetSessionTime`** | Game session time in seconds |
+| **`SessionID`** | **`GetSessionID`** | Unique game session identifier. Can be useful for separating sessions if there are several sessions of your game running on the network and you are looking for players on the network yourself |
+| **`PlayerID`** | **`GetPlayerID`** | Player's ID |
+| **`PlayerName`** | **`GetPlayerName`** | Player's name |
+| **`PlayerDominantHand`** | **`GetPlayerDominantHand`** | Player's dominant hand |
+
+<a name="integration-methods"></a>
+### UARVIIntegrationSubSystem Methods
+
+| Method | Description |
+| --- | --- |
+| **`GetSDKVersion`** | Gets the SDK version |
+| **`GetMessagesError`** | Returns a MessagesSystem initialization error |
+| **`GetSessionVariablesError`** | Returns a SessionVariablesSystem initialization error |
+
+<a name="integration-events"></a>
+### UARVIIntegrationSubSystem Events
+
+| Event | Description |
+| --- | --- |
+| **`PlayerPositionRequestHandler`** | Player position request handler. Use to handle in-game commands |
+| **`TimeLeftRequestHandler`** | Remaining game time request handler |
+| **`PlatformMessageRequestHandler`** | Arbitrary request handler |
+| **`PlayerNameChangedHandler`** | Player name change handler. Use to update the player's name in the game |
+| **`PlayerDominantHandChangedHandler`** | Player dominant hand change handler. Use to update the player's dominant hand in the game |
+
+Below is a list of methods for interacting with the platform. For C++, these are methods of the UARVIIntegrationSubSystem class object. For Blueprint, these are asynchronous nodes that do not require an object reference.
+
+| Method | Description |
+| --- | --- |
+| **`IsApplicationEntitled`** | Checks application entitlement |
+| **`ServerStarted`** | Notifies platform about starting game server |
+| **`GameCompleted`** | Notifies platform about completing the game |
+| **`CallOperator`** | Notifies platform about operator calling |
+| **`SetAudioChatChannel`** | Sets an audio chat channel |
+| **`SendGameMessage`** | Sends text message to platform |
+| **`SendLogMessage`** | Sends service/debug message which will be logged on platform |
+| **`SendWarningMessage`** | Sends warning message which will be shown in administrative panel |
+| **`SendTrackingMessage`** | Sends tracking message which will be tracked on log timeline |
+| **`ActivateInGameCommand`** | Activates in-game command. If several commands have the same activation message, then they will all be activated |
+| **`DeactivateInGameCommand`** | Deactivates in-game command. If several commands have the same deactivation message, then they will all be deactivated |
+| **`SetSessionData`** | Sets session-related data by name |
+| **`TryGetSessionData`** | Gets session-related data by name |
+| **`TryGetUISettingsData`** | Gets UI settings data by name |
+| **`SetPlayerName`** | Sets the new player name |
+| **`SetPlayerDominantHand`** | Sets the new player dominant hand |
 
 <a name="integration-isapplicationentitled"></a>
 ## Verification
