@@ -178,7 +178,7 @@ void AExampleActor::BeginPlay()
   Super::BeginPlay();
   if (UGameInstance* GameInstance = GetGameInstance())
     if (UARVIIntegrationSubSystem* ArviIntegration = GameInstance->GetSubsystem<UARVIIntegrationSubSystem>())
-      ArviIntegration->TimeLefRequestHandler.BindDynamic(this, &ThisClass::HandlerTimeLeft);
+      ArviIntegration->TimeLeftRequestHandler.BindDynamic(this, &ThisClass::HandlerTimeLeft);
 }
 
 bool AExampleActor::HandlerTimeLeft(int& TimeLeftInSeconds)
