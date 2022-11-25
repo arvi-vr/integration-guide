@@ -13,7 +13,7 @@ Utility for uploading new game versions to ARVI platform. Uploading procedure is
 - Added check for server availability
 
 <hr>
-<button onclick="window.open('https://storage-us-east-1.arvilab.com/storage/applications/3/4b3e2797-34c6-45a7-84a7-11dc0e4f6bc4/versions/e025b8c4-eae3-44ba-b428-55ec7d3cbc39/files/Build%20Uploader%20Setup.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
+<button onclick="window.open('https://storage-us-east-1.arvilab.com/storage/applications/3/4b3e2797-34c6-45a7-84a7-11dc0e4f6bc4/versions/681f2bd6-d384-4e1d-a280-692227e81bd5/files/Build%20Uploader%20Setup.exe')" type="button" class="btn btn-dark btn-lg">Download</button>
 
 # API Tester 1.6 (November 18, 2022)
 
