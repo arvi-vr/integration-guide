@@ -20,6 +20,7 @@ Utility for uploading new game versions to ARVI platform. Uploading procedure is
 Utility for testing SDK integration. For more information see [TESTING]({{ '/tabs/testing/' | relative_url }}) section.
 
 ## Changes
+- Added support for activating/deactivating multiple in-game commands
 - Fixed handling of changing Session Data variables
 
 <hr>

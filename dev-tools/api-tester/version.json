@@ -1,6 +1,6 @@
 {
-	"version":"1.6",
-	"name":"1.6",
-	"changes":"\u2022 Added UI Settings support\n\u2022 Session Variables now can be saved and loaded",
-	"url":"https:\/\/storage-eu-east-1.arvilab.com\/storage\/applications\/3\/cee1325e-f16a-4237-b92a-eda4d30803f5\/versions\/1cb8553a-7f29-46b1-9c9e-49d4188bfc18\/files\/APITester.exe"
+	"version":"1.7",
+	"name":"1.7",
+	"changes":"\u2022 Added support for activating/deactivating multiple in-game commands\n\u2022 Fixed handling of changing Session Data variables",
+	"url":"https:\/\/storage-us-east-1.arvilab.com\/storage\/applications\/3\/cee1325e-f16a-4237-b92a-eda4d30803f5\/versions\/428f4747-cdd1-4c6f-994d-5e3b8d1eaec9\/files\/APITester.exe"
 }
