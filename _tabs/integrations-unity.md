@@ -51,7 +51,9 @@ All features required for integration are in the `Integration` class. A detailed
 | **`CallOperator`** | Sends a request for operator assistance to the platform. Bind a call to this method to game objects in the game so that players can request operator assistance |
 | **`SetAudioChatChannel`** | Sets an audio chat channel. Useful for games where there is a division into teams so that players on one team do not hear the players on the other |
 | **`ActivateInGameCommand`** | Activates in-game command. If several commands have the same activation message, then they will all be activated |
+| **`ActivateInGameCommands`** | Activates multiple in-game commands at once |
 | **`DeactivateInGameCommand`** | Deactivates in-game command. If several commands have the same deactivation message, then they will all be deactivated |
+| **`DeactivateInGameCommands`** | Deactivates multiple in-game commands at once |
 | **`SendLogMessage`** | Sends text message to platform log |
 | **`SendTrackingMessage`** | Sends tracking message. It will be used for your events visualization |
 | **`SetPlayerName`** | Sets the new player name. Use this method if your game supports player name input |
@@ -279,7 +281,18 @@ Integration.DeactivateInGameCommand("COMMAND_SKIP_PUZZLE3_DEACTIVATE").OnComplet
       Debug.LogWarning($"Skip Puzzle 3 deactivation failed. Error code: {response.Error.Code}. Error message: {response.Error.Message}");
   });
 ```
-Here the commands "Restart" and "Skip Puzzle 3" are used for example only. Your game will have its own in-game commands.
+Here the commands "Restart" and "Skip Puzzle 3" are used for example only. Your game will have its own in-game commands.  
+You can also activate/deactivate multiple in-game commands at once:
+```cs
+// Activate "Command1" and "Command2" in-game command
+Integration.ActivateInGameCommands(new string[] { "COMMAND_1_ACTIVATE", "COMMAND_2_ACTIVATE" }).OnComplete(
+  (response) => {
+    if (response.Success)
+      Debug.Log("Activated.");
+    else
+      Debug.LogWarning($"Activation failed. Error code: {response.Error.Code}. Error message: {response.Error.Message}");
+  });
+```
 
 ### Sending messages
 If you need to report any event in the game (such as a puzzle solved), you can send a text message to the platform. It will be saved in game logs and will be available for display in the game session information on the website. Use the `Integration.SendGameMessage(message, messageGroup)` method to forward your message. As an optional second parameter, you can specify the group (designated using any word of your choosing), and all messages referencing this group will be grouped when displayed. Examples:
